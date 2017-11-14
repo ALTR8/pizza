@@ -1,7 +1,7 @@
-# pizza
-pizza challenge
+# pizza challenge
 
-cd pizza
-node pizza.js
 
-see pretty 🍕
+```cd pizza```<br/>
+```node pizza.js```
+
+see 🍕
