@@ -4,20 +4,23 @@ let popularToppings = {};
 let topTwentyToppings = [];
 let popularCombos = {};
 let topTwentyCombos = {};
+let toppingsList = []
+
+
+//initial iteration to get toppingsList - an array of each separate order
+for (let i = 0; i < pizzas.length; i++) {
+    toppingsList.push(pizzas[i].toppings);
+};
 
 //--------------------------TOPPINGS
 
-for (let i = 0; i < pizzas.length; i++) {
-    //toppingsList = an array of each separate order
-    let toppingsList = pizzas[i].toppings;
     //isolates each topping
-    for (let j = 0; j < toppingsList.length; j++) {
-        let currentTopping = toppingsList[j];
-        if (popularToppings[currentTopping]) {
-            popularToppings[currentTopping]++;
-        } else {
-            popularToppings[currentTopping] = 1;
-        };
+for (let j = 0; j < toppingsList.length; j++) {
+    let currentTopping = toppingsList[j];
+    if (popularToppings[currentTopping]) {
+        popularToppings[currentTopping]++;
+    } else {
+        popularToppings[currentTopping] = 1;
     };
 };
 
@@ -40,8 +43,10 @@ console.log("\x1b[40m", "\x1b[37m", " ");
 
 //--------------------------COMBOS
 
+//iterating again because have to increment numbers differently than the initial iteration through the array
+
 for (let i = 0; i < pizzas.length; i++) {
-    //toppingsList = an array of each separate order
+
     let toppingsList = pizzas[i].toppings;
     if (popularCombos[toppingsList]) {
         popularCombos[toppingsList]++;
@@ -50,7 +55,7 @@ for (let i = 0; i < pizzas.length; i++) {
     }
 };
 
-//sorts combos by popularity
+//sorts combos by popularity - keys and values are separate to sort
 combosSorted = Object.keys(popularCombos).sort(function(a,b) {
     return popularCombos[b] - popularCombos[a]
 });
