@@ -30,7 +30,7 @@ console.log("\x1b[40m", "\x1b[37m", 'Most popular pizza toppings - ');
 console.log("\x1b[40m", "\x1b[37m", " ");
 
 //isolate top twenty toppings and log
-for (let z = 0; z < 19; z++) {
+for (let z = 0; z < 20; z++) {
     topTwentyToppings.push(toppingsSorted[z]);
     console.log("\x1b[40m", "\x1b[37m", "🍕    " + (z+1)+". " + topTwentyToppings[z]);
 };
@@ -66,7 +66,7 @@ console.log("\x1b[40m", "\x1b[37m", "Most popular pizza combos - ");
 console.log("\x1b[40m", "\x1b[37m", " ");
 
 //isolate top twenty combos and log
-for (let z = 0; z < 19; z++) {
+for (let z = 0; z < 20; z++) {
     let combo = combosSorted[z];
     let number = comboValuesSorted[z];
     topTwentyCombos[combo] = number
