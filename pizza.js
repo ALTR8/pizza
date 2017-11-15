@@ -4,23 +4,26 @@ let popularToppings = {};
 let topTwentyToppings = [];
 let popularCombos = {};
 let topTwentyCombos = {};
-let toppingsList = []
+let toppingsArray = [];
+let toppingsList;
 
-
-//initial iteration to get toppingsList - an array of each separate order
 for (let i = 0; i < pizzas.length; i++) {
-    toppingsList.push(pizzas[i].toppings);
-};
+    toppingsArray.push(pizzas[i].toppings);
+    toppingsList = pizzas[i].toppings;
 
-//--------------------------TOPPINGS
+    for (let j = 0; j < toppingsList.length; j++) {
+        let currentTopping = toppingsList[j];
+        if (popularToppings[currentTopping]) {
+            popularToppings[currentTopping]++;
+        } else {
+            popularToppings[currentTopping] = 1;
+        };
+    };
 
-    //isolates each topping
-for (let j = 0; j < toppingsList.length; j++) {
-    let currentTopping = toppingsList[j];
-    if (popularToppings[currentTopping]) {
-        popularToppings[currentTopping]++;
+    if (popularCombos[toppingsList]) {
+        popularCombos[toppingsList]++;
     } else {
-        popularToppings[currentTopping] = 1;
+        popularCombos[toppingsList] = 1;
     };
 };
 
@@ -35,6 +38,7 @@ console.log("\x1b[40m", "\x1b[37m", " ");
 //isolate top twenty toppings and log
 for (let z = 0; z < 20; z++) {
     topTwentyToppings.push(toppingsSorted[z]);
+    topTwentyToppings[z] === "alredo sauce" ? topTwentyToppings[z] = "alfredo sauce" : topTwentyToppings[z]
     console.log("\x1b[40m", "\x1b[37m", "🍕    " + (z+1)+". " + topTwentyToppings[z]);
 };
 
@@ -42,18 +46,6 @@ for (let z = 0; z < 20; z++) {
 console.log("\x1b[40m", "\x1b[37m", " ");
 
 //--------------------------COMBOS
-
-//iterating again because have to increment numbers differently than the initial iteration through the array
-
-for (let i = 0; i < pizzas.length; i++) {
-
-    let toppingsList = pizzas[i].toppings;
-    if (popularCombos[toppingsList]) {
-        popularCombos[toppingsList]++;
-    } else {
-        popularCombos[toppingsList] = 1;
-    }
-};
 
 //sorts combos by popularity - keys and values are separate to sort
 combosSorted = Object.keys(popularCombos).sort(function(a,b) {
