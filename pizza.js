@@ -27,7 +27,7 @@ for (let i = 0; i < pizzas.length; i++) {
     };
 };
 
-//--------------------------SORTING - this needs to be better
+//--------------------------SORTING - this needs to be better. I want to implement heap sort - just need the time to learn to do it. 
 
 toppingsSorted = Object.keys(popularToppings).sort(function(a,b) {
     return popularToppings[b] - popularToppings[a]
