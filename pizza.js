@@ -8,9 +8,12 @@ let popularCombos = {};
 let topTwentyCombos = {};
 
 for (let i = 0; i < pizzas.length; i++) {
+    //arrays of pizzas ordered
     toppingsList = pizzas[i].toppings;
+    //push arrays into empty toppingsArray
     toppingsArray.push(toppingsList);
 
+    //loop through list and add or increment instances of topping to popularToppings object
     for (let j = 0; j < toppingsList.length; j++) {
         let currentTopping = toppingsList[j];
         if (popularToppings[currentTopping]) {
@@ -19,7 +22,7 @@ for (let i = 0; i < pizzas.length; i++) {
             popularToppings[currentTopping] = 1;
         };
     };
-
+    //add and increment topping combos to popularCombos object
     if (popularCombos[toppingsList]) {
         popularCombos[toppingsList]++;
     } else {
@@ -27,9 +30,9 @@ for (let i = 0; i < pizzas.length; i++) {
     };
 };
 
-//--------------------------SORT
+// --------------------------SORT
 
-//--------------------------Toppings
+// --------------------------Toppings
 
 let toppingsSort = Object.keys(popularToppings)
 
@@ -52,20 +55,9 @@ comboValuesIsolated = Object.keys(popularCombos).map(function(key) {
     return popularCombos[key];
 });
 
-function insertSort(arr) {
-    for (var i = 1; i < arr.length; i++) {
-        var tmp = arr[i],
-        j = i;
-        while (arr[j - 1] < tmp) {
-            arr[j] = arr[j - 1];
-            --j;
-        }
-        arr[j] = tmp;
-    }
-    return arr;
-};
-
-comboValuesSorted = insertSort(comboValuesIsolated);
+comboValuesSorted = comboValuesIsolated.sort(function(a,b) {
+    return b-a
+});
 
 console.log("\x1b[40m", "\x1b[37m", "Most popular pizza combos - ");
 console.log("\x1b[40m", "\x1b[37m", " ");
@@ -73,10 +65,9 @@ console.log("\x1b[40m", "\x1b[37m", " ");
 
 for (let z = 0; z < 20; z++) {
     let combo = combosSorted[z];
-    let number = comboValuesSorted[z];
+    const number = comboValuesSorted[z];
     topTwentyCombos[combo] = number
     combo = combo.length > 1 ? combo.split(',').join(', ') : combo
-
     console.log("\x1b[40m", "\x1b[37m", "🍕    " + (z+1) + ". " + combo +" was ordered "+ number+" times")
 };
 console.log(" ");
