@@ -8,8 +8,8 @@ let popularCombos = {};
 let topTwentyCombos = {};
 
 for (let i = 0; i < pizzas.length; i++) {
-    toppingsArray.push(pizzas[i].toppings);
     toppingsList = pizzas[i].toppings;
+    toppingsArray.push(toppingsList);
 
     for (let j = 0; j < toppingsList.length; j++) {
         let currentTopping = toppingsList[j];
@@ -27,33 +27,45 @@ for (let i = 0; i < pizzas.length; i++) {
     };
 };
 
-//--------------------------SORTING - this needs to be better. I want to implement heap sort - just need the time to learn to do it. 
+//--------------------------SORT
 
-toppingsSorted = Object.keys(popularToppings).sort(function(a,b) {
-    return popularToppings[b] - popularToppings[a]
-});
+//--------------------------Toppings
+
+let toppingsSort = Object.keys(popularToppings)
 
 console.log("\x1b[40m", "\x1b[37m", 'Most popular pizza toppings - ');
 console.log("\x1b[40m", "\x1b[37m", " ");
 
 
 for (let z = 0; z < 20; z++) {
-    topTwentyToppings.push(toppingsSorted[z]);
+    topTwentyToppings.push(toppingsSort[z]);
     topTwentyToppings[z] === "alredo sauce" ? topTwentyToppings[z] = "alfredo sauce" : topTwentyToppings[z]
     console.log("\x1b[40m", "\x1b[37m", "🍕    " + (z+1)+". " + topTwentyToppings[z]);
 };
 console.log("\x1b[40m", "\x1b[37m", " ");
 
-combosSorted = Object.keys(popularCombos).sort(function(a,b) {
-    return popularCombos[b] - popularCombos[a]
-});
+//--------------------------Combos
+
+combosSorted = Object.keys(popularCombos)
 
 comboValuesIsolated = Object.keys(popularCombos).map(function(key) {
     return popularCombos[key];
 });
-comboValuesSorted = comboValuesIsolated.sort(function(a,b) {
-    return b-a
-});
+
+function insertSort(arr) {
+    for (var i = 1; i < arr.length; i++) {
+        var tmp = arr[i],
+        j = i;
+        while (arr[j - 1] < tmp) {
+            arr[j] = arr[j - 1];
+            --j;
+        }
+        arr[j] = tmp;
+    }
+    return arr;
+};
+
+comboValuesSorted = insertSort(comboValuesIsolated);
 
 console.log("\x1b[40m", "\x1b[37m", "Most popular pizza combos - ");
 console.log("\x1b[40m", "\x1b[37m", " ");
