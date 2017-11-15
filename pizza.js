@@ -65,6 +65,7 @@ console.log("\x1b[40m", "\x1b[37m", " ");
 
 for (let z = 0; z < 20; z++) {
     let combo = combosSorted[z];
+    combo.includes("alredo sauce") ? combo = combo.replace("alredo sauce", "alfredo sauce") : combo
     const number = comboValuesSorted[z];
     topTwentyCombos[combo] = number
     combo = combo.length > 1 ? combo.split(',').join(', ') : combo
