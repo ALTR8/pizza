@@ -1,6 +1,5 @@
 const pizzas = require('./pizzas');
 
-let toppingsArray = [];
 let popularToppings = {};
 let topTwentyToppings = [];
 let toppingsList;
@@ -9,9 +8,8 @@ let topTwentyCombos = {};
 
 for (let i = 0; i < pizzas.length; i++) {
     //arrays of pizzas ordered
+
     toppingsList = pizzas[i].toppings;
-    //push arrays into empty toppingsArray
-    toppingsArray.push(toppingsList);
 
     //loop through list and add or increment instances of topping to popularToppings object
     for (let j = 0; j < toppingsList.length; j++) {
