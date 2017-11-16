@@ -8,8 +8,7 @@ let topTwentyCombos = {};
 
 for (let i = 0; i < pizzas.length; i++) {
     //arrays of pizzas ordered
-
-    toppingsList = pizzas[i].toppings;
+    toppingsList = pizzas[i].toppings.slice().sort();
 
     //loop through list and add or increment instances of topping to popularToppings object
     for (let j = 0; j < toppingsList.length; j++) {
