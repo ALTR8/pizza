@@ -2,13 +2,12 @@ const pizzas = require('./pizzas');
 
 let toppingsList;
 let popularToppings = {};
-let topTwentyToppings = [];
 let popularCombos = {};
-let topTwentyCombos = {};
 
 for (let i = 0; i < pizzas.length; i++) {
     //arrays of pizzas ordered
-    toppingsList = pizzas[i].toppings.slice().sort();
+
+    toppingsList = pizzas[i].toppings;
 
     //loop through list and add or increment instances of topping to popularToppings object
     for (let j = 0; j < toppingsList.length; j++) {
@@ -31,16 +30,23 @@ for (let i = 0; i < pizzas.length; i++) {
 
 // --------------------------Toppings
 
-let toppingsSort = Object.keys(popularToppings)
+let popularT = []
+for (let topping in popularToppings) {
+    popularT.push([topping, popularToppings[topping]])
+}
+
+popularT.sort(function(a, b) {
+    return b[1] - a[1];
+});
 
 console.log("\x1b[40m", "\x1b[37m", 'Most popular pizza toppings - ');
 console.log("\x1b[40m", "\x1b[37m", " ");
 
 
 for (let z = 0; z < 20; z++) {
-    topTwentyToppings.push(toppingsSort[z]);
-    topTwentyToppings[z] === "alredo sauce" ? topTwentyToppings[z] = "alfredo sauce" : topTwentyToppings[z]
-    console.log("\x1b[40m", "\x1b[37m", "🍕    " + (z+1)+". " + topTwentyToppings[z]);
+    let topping = popularT[z];
+    topping = topping.toString().split(',').join(', ')
+    console.log("\x1b[40m", "\x1b[37m", "🍕    " + (z+1) + ". " + topping)
 };
 console.log("\x1b[40m", "\x1b[37m", " ");
 
@@ -48,12 +54,14 @@ console.log("\x1b[40m", "\x1b[37m", " ");
 
 combosSorted = Object.keys(popularCombos)
 
-comboValuesIsolated = Object.keys(popularCombos).map(function(key) {
-    return popularCombos[key];
-});
 
-comboValuesSorted = comboValuesIsolated.sort(function(a,b) {
-    return b-a
+let popular = []
+for (let topping in popularCombos) {
+    popular.push([topping, popularCombos[topping]])
+}
+
+popular.sort(function(a, b) {
+    return b[1] - a[1];
 });
 
 console.log("\x1b[40m", "\x1b[37m", "Most popular pizza combos - ");
@@ -61,11 +69,8 @@ console.log("\x1b[40m", "\x1b[37m", " ");
 
 
 for (let z = 0; z < 20; z++) {
-    let combo = combosSorted[z];
-    combo.includes("alredo sauce") ? combo = combo.replace("alredo sauce", "alfredo sauce") : combo
-    let number = comboValuesSorted[z];
-    topTwentyCombos[combo] = number
-    combo = combo.length > 2 ? combo.split(',').join(', ').replace(/,(?!.*,)/gmi, ' and') : combo
-    console.log("\x1b[40m", "\x1b[37m", "🍕    " + (z+1) + ". " + combo +" was ordered "+ number+" times")
+    let combo = popular[z];
+    combo = combo.toString().split(',').join(', ')
+    console.log("\x1b[40m", "\x1b[37m", "🍕    " + (z+1) + ". " + combo)
 };
 console.log(" ");
